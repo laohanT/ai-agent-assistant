@@ -123,7 +123,7 @@ const AIChat: React.FC = () => {
             controller.abort()
         }, 30000)
         try {
-            let response = await fetch('http://localhost:3001/chatMessage/agentToolStream', {
+            let response = await fetch(`${import.meta.env.VITE_AI_AGENT_URL}/chatMessage/agentToolStream`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
