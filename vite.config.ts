@@ -17,9 +17,7 @@ export default defineConfig({
     port: 5173, // 保持和 CRA 一致的端口
     open: true, // 自动打开浏览器
   },
-  build: {
-    outDir: "build", // 保持和 CRA 一致的输出目录
-  },
+  build: {},
 });
 
 console.log("我怎么可能没被用呢？");
