@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+export const BASE_URL = import.meta.env.VITE_AI_AGENT_URL;
 
 // 定义路由项接口
 interface RouteItem {

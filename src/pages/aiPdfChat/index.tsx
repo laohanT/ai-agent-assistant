@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './AIPdfChat.css';
-import { getOrCreateSessionIds } from '../../utils/tools';
+import { BASE_URL, getOrCreateSessionIds } from '../../utils/tools';
 import { LinkOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
 
@@ -33,7 +33,7 @@ const AIPdfChat: React.FC = () => {
         const timer = setTimeout(() => controller.abort(), 30000);
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_AI_AGENT_URL}/rag/ask`, {
+            const response = await fetch(`${BASE_URL}/rag/ask`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const AIPdfChat: React.FC = () => {
             setUploadLoading(true)
             const formData = new FormData()
             formData.append('file', info.file)
-            const response = await fetch(`${import.meta.env.VITE_AI_AGENT_URL}/rag/upload`, {
+            const response = await fetch(`${BASE_URL}/rag/upload`, {
                 method: "POST",
                 body: formData
             })

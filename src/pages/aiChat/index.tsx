@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
 import './AIChat.css'; // 假设我们会创建这个CSS文件
-import { getOrCreateSessionIds } from '../../utils/tools';
+import { BASE_URL, getOrCreateSessionIds } from '../../utils/tools';
 import { Tooltip } from 'antd';
 import rehypeHighlight from 'rehype-highlight';
 
@@ -98,7 +98,7 @@ const AIChat: React.FC = () => {
     // 获取历史消息
     const getAllHistory = async () => {
         try {
-            let response = await fetch(`${import.meta.env.VITE_AI_AGENT_URL}/chatMessage/getAllHistory`, {
+            let response = await fetch(`${BASE_URL}/chatMessage/getAllHistory`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -123,7 +123,7 @@ const AIChat: React.FC = () => {
             controller.abort()
         }, 30000)
         try {
-            let response = await fetch(`${import.meta.env.VITE_AI_AGENT_URL}/chatMessage/agentToolStream`, {
+            let response = await fetch(`${BASE_URL}/chatMessage/agentToolStream`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
