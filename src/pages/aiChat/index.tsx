@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
 import './AIChat.css'; // 假设我们会创建这个CSS文件
 import { BASE_URL, getOrCreateSessionIds } from '../../utils/tools';
-import { Tooltip } from 'antd';
+import { message, Spin, Tooltip } from 'antd';
 import rehypeHighlight from 'rehype-highlight';
 
 interface Message {
@@ -48,7 +48,9 @@ const AIChat: React.FC = () => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     // 当前会话
     const currentSession = sessions.find(s => s.sessionId === currentSessionId);
-
+    // 会话历史loading
+    const [spinning, setSpinning] = useState<boolean>(false)
+    const [messageApi, contextHolder] = message.useMessage()
 
 
     // 滚动条
@@ -98,6 +100,7 @@ const AIChat: React.FC = () => {
     // 获取历史消息
     const getAllHistory = async () => {
         try {
+            setSpinning(true)
             let response = await fetch(`${BASE_URL}/chatMessage/getAllHistory`, {
                 headers: {
                     "Content-Type": "application/json"
@@ -109,9 +112,10 @@ const AIChat: React.FC = () => {
                 messages: item.data
             }))
             setSessions(data)
-
         } catch (error) {
-
+            messageApi.error('会话历史获取失败')
+        } finally {
+            setSpinning(false)
         }
     }
 
@@ -222,17 +226,19 @@ const AIChat: React.FC = () => {
                     </div>
                 </div>
                 <div className="session-list">
-                    {sessions.map(session => (
-                        <Tooltip key={session.sessionId} title={session.messages[0]?.content.length > 18 ? session.messages[0]?.content : ''}>
-                            <div
-                                className={`session-item ${session.sessionId === currentSessionId ? 'active' : ''}`}
-                                onClick={() => selectSession(session.sessionId)}
-                            >
-                                {session.messages.length > 0 ? session.messages[0]?.content : '新会话'}
-                            </div>
-                        </Tooltip>
+                    <Spin spinning={spinning}>
+                        {sessions.map(session => (
+                            <Tooltip key={session.sessionId} title={session.messages[0]?.content.length > 18 ? session.messages[0]?.content : ''}>
+                                <div
+                                    className={`session-item ${session.sessionId === currentSessionId ? 'active' : ''}`}
+                                    onClick={() => selectSession(session.sessionId)}
+                                >
+                                    {session.messages.length > 0 ? session.messages[0]?.content : '新会话'}
+                                </div>
+                            </Tooltip>
 
-                    ))}
+                        ))}
+                    </Spin>
                 </div>
             </div>
             <div className="ai-chat-main">
@@ -279,6 +285,7 @@ const AIChat: React.FC = () => {
 
                 </div>
             </div>
+            {contextHolder}
         </div>
     );
 };
