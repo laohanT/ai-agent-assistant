@@ -15,7 +15,7 @@
 }
 
 .sidebar-header {
-    height: 60px;
+    height: 75px;
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
     background-color: #fafafa;
@@ -88,7 +88,7 @@
 }
 
 .main-header {
-    height: 60px;
+    height: 75px;
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
     background-color: #fafafa;
@@ -100,6 +100,13 @@
     font-size: 18px;
     font-weight: 600;
     color: #333;
+}
+
+.ai-description {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
 }
 
 .chat-messages {

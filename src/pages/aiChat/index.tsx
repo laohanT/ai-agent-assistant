@@ -238,6 +238,7 @@ const AIChat: React.FC = () => {
             <div className="ai-chat-main">
                 <div className="main-header">
                     <h3>AI助手</h3>
+                    <p className="ai-description">流式响应（SSE）、会话管理、Function Calling (查询城市天气、获取当前时间)、多轮工具调用Agent循环</p>
                 </div>
                 <div className="chat-messages">
                     {currentSession?.messages ? (

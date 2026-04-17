@@ -113,6 +113,7 @@ const AIPdfChat: React.FC = () => {
             <div className="ai-pdf-chat-main">
                 <div className="main-header">
                     <h3>AI 助手</h3>
+                    <p className="ai-description">RGA检索增强，根据上传PDf文件来回答问题，只回答文档本身内容。</p>
                 </div>
                 <div className="chat-messages">
                     {messages.length > 0 ? (

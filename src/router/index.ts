@@ -19,7 +19,7 @@ export const routes = [
         path: "ai-pdf-chat",
         Component: AIPdfChat,
         handle: {
-          name: "PDF AI助手",
+          name: "RAG 文档助手",
         },
       },
     ],
