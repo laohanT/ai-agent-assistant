@@ -103,7 +103,8 @@ const AIChat: React.FC = () => {
             setSpinning(true)
             let response = await fetch(`${BASE_URL}/chatMessage/getAllHistory`, {
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'ngrok-skip-browser-warning': 'true',
                 },
             })
             let res: ResponseData = await response.json()
@@ -130,7 +131,8 @@ const AIChat: React.FC = () => {
             let response = await fetch(`${BASE_URL}/chatMessage/agentToolStream`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'ngrok-skip-browser-warning': 'true',
                 },
                 body: JSON.stringify({ message, sessionId: currentSessionId })
             })

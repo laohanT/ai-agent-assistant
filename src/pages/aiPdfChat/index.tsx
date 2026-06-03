@@ -37,6 +37,7 @@ const AIPdfChat: React.FC = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true',
                 },
                 body: JSON.stringify({ question: message, }),
                 signal: controller.signal,
@@ -80,7 +81,10 @@ const AIPdfChat: React.FC = () => {
             formData.append('file', info.file)
             const response = await fetch(`${BASE_URL}/rag/upload`, {
                 method: "POST",
-                body: formData
+                body: formData,
+                headers: {
+                    'ngrok-skip-browser-warning': 'true',
+                }
             })
             const res = await response.json()
             if (res.status === 200) {
